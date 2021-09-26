@@ -9,9 +9,9 @@ output: github_document
 library(tidyverse)
 ```
 
-## problem 1
+## Problem 1
 
-### create dataframe
+### Create dataframe
 ```{r}
 problem1_df <- tibble(
   vec_random = rnorm(10, mean = 0, sd = 1),
@@ -21,7 +21,7 @@ problem1_df <- tibble(
 )
 ```
 
-### take the mean of a variable in a dataframe
+### Take the mean of a variable in a dataframe
 ```{r}
 mean(pull(problem1_df,vec_random))        # mean works
 mean(pull(problem1_df,vec_logic))         # mean works
@@ -29,7 +29,7 @@ mean(pull(problem1_df,vec_char))          # mean does not work
 mean(pull(problem1_df,vec_factor))        # mean does not work
 ```
 
-### convert variables
+### Convert variables
 ```{r eval=FALSE}
 as.numeric(pull(problem1_df,vec_logic))   # "TRUE"and"FALSE" -> "0"and"1"
 as.numeric(pull(problem1_df,vec_char))    # cannot be converted to numbers
@@ -39,7 +39,23 @@ Conclusion: The logic and factor can be converted. The mean of the logic vector 
 
 ## Problem 2
 
-```{r}
+### Data description
 
+### The data of the "Penguins" is
+```{r}
+data ("penguins", package = "palmerpenguins")
+force (penguins)                                               # data
+mean (pull(penguins,flipper_length_mm), na.rm = TRUE)       # mean of flipper length  
 ```
+At the mean time, "Penguins" dataset includes `r nrow(penguins)` subjects and `r ncol(penguins)` variables. The flipper length includes "NA", so we need to use "na.rm =TRUE" to calculate the rest numbers. The mean of the flipper length is `r mean ( pull ( penguins,flipper_length_mm ), na.rm = TRUE ) `. 
+
+### Make a scatterplot
+```{r}
+# Use ggplot to create the plot
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = (species))) + geom_point()
+# Use ggsave to save the plot
+# ggsave("penguins_scatter_plot.pdf")
+```
+
+
 
