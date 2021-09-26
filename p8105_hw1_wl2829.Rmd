@@ -1,0 +1,45 @@
+---
+title: "p8105_hw1_wl2829"
+author: "Wentong"
+date: "9/26/2021"
+output: github_document
+---
+
+```{r include=FALSE,echo=FALSE}
+library(tidyverse)
+```
+
+## problem 1
+
+### create dataframe
+```{r}
+problem1_df <- tibble(
+  vec_random = rnorm(10, mean = 0, sd = 1),
+  vec_logic = vec_random > 0,
+  vec_char = c("This","is","Wentong","Liu's","answer","for","homework","1","problem","1"),
+  vec_factor = factor(c("good","good","good","medium","medium","medium","medium","bad","bad","bad"))
+)
+```
+
+### take the mean of a variable in a dataframe
+```{r}
+mean(pull(problem1_df,vec_random))        # mean works
+mean(pull(problem1_df,vec_logic))         # mean works
+mean(pull(problem1_df,vec_char))          # mean does not work
+mean(pull(problem1_df,vec_factor))        # mean does not work
+```
+
+### convert variables
+```{r eval=FALSE}
+as.numeric(pull(problem1_df,vec_logic))   # "TRUE"and"FALSE" -> "0"and"1"
+as.numeric(pull(problem1_df,vec_char))    # cannot be converted to numbers
+as.numeric(pull(problem1_df,vec_factor))  # "good","medium","bad" -> "2","3","1"
+```
+Conclusion: The logic and factor can be converted. The mean of the logic vector works and it represents the tendency of true or false. On the other hand, the mean of factor vector can not be calculated because it is meaningless to some extent.
+
+## Problem 2
+
+```{r}
+
+```
+
